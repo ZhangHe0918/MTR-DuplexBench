@@ -1,4 +1,4 @@
-# MTR-DuplexBench: A Comprehensive Audio Dataset for Multi-Turn Dialogue Evaluation
+# MTR-DuplexBench: Towards a Comprehensive Evaluation of Multi-Round Conversations for Full-Duplex Speech Language Models
 
 🎉🎉 **MTR-DuplexBench has been accepted by ACL 2026 Findings!** 
 
