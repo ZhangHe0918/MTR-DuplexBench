@@ -293,6 +293,15 @@ The `envs/` directory contains conda environment YAML and requirements files for
 
 ---
 
+## Contact
+
+If you have any questions, feel free to reach out through the following channels:
+
+- Open an issue on [GitHub](https://github.com/ZhangHe0918/MTR-DuplexBench/issues) or start a discussion on [HuggingFace Community](https://huggingface.co/datasets/Jeff0918/MTR-DuplexBench)
+- Email: zhanghe_0918@163.com or wenqian.cui@link.cuhk.edu.hk
+
+---
+
 ## Citation
 
 ```bibtex
