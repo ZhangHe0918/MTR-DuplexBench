@@ -1,6 +1,8 @@
-# MTR-DuplexBench Evaluation Code
+# MTR-DuplexBench: A Comprehensive Audio Dataset for Multi-Turn Dialogue Evaluation
 
-This directory contains the evaluation scripts for [MTR-DuplexBench](https://huggingface.co/datasets/Jeff0918/MTR-DuplexBench). Follow the guide below to set up and run evaluations for your own models.
+**Accepted at ACL 2026 Findings** | [Paper](https://arxiv.org/abs/2511.10262) | [HuggingFace Dataset](https://huggingface.co/datasets/Jeff0918/MTR-DuplexBench)
+
+This directory contains the evaluation scripts for MTR-DuplexBench. Follow the guide below to set up and run evaluations for your own models.
 
 ---
 
