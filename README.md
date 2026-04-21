@@ -1,6 +1,8 @@
 # MTR-DuplexBench: A Comprehensive Audio Dataset for Multi-Turn Dialogue Evaluation
 
-**Accepted at ACL 2026 Findings** | [Paper](https://arxiv.org/abs/2511.10262) | [HuggingFace Dataset](https://huggingface.co/datasets/Jeff0918/MTR-DuplexBench)
+🎉🎉 **MTR-DuplexBench has been accepted by ACL 2026 Findings!** 
+
+ 📄 [Paper](https://arxiv.org/abs/2511.10262) | 🤗 [HuggingFace Dataset](https://huggingface.co/datasets/Jeff0918/MTR-DuplexBench)
 
 This directory contains the evaluation scripts for MTR-DuplexBench. Follow the guide below to set up and run evaluations for your own models.
 
