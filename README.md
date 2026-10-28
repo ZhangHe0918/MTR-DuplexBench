@@ -10,7 +10,7 @@ This directory contains the evaluation scripts for MTR-DuplexBench. Follow the g
 
 Portions of this benchmark are derived from the CANDOR corpus. Access must be requested at [https://betterup-data-requests.herokuapp.com](https://betterup-data-requests.herokuapp.com). Citation: Reece et al. (2023), Science Advances.
 
-Dialogue Quality uses CANDOR-derived segments. Obtain your own approved copy of CANDOR before using this portion of the benchmark. The public replacement is a [segment index](https://huggingface.co/datasets/Jeff0918/MTR-DuplexBench/blob/main/data/Dialogue_Quality/candor_segments.csv) and timing annotations. The index is published and the transcript has been removed from the current Hugging Face version; audio removal and historical/cache cleanup are in progress. CANDOR recordings and transcripts must not be redistributed through this benchmark. See [LICENSE_SCOPE.md](LICENSE_SCOPE.md) for the distinction between the code's Apache 2.0 license and the CANDOR terms.
+Dialogue Quality uses CANDOR-derived segments. Obtain your own approved copy of CANDOR before using this portion of the benchmark. (https://huggingface.co/datasets/Jeff0918/MTR-DuplexBench/blob/main/data/Dialogue_Quality/candor_segments.csv) and timing annotations. CANDOR recordings and transcripts must not be redistributed through this benchmark. See [LICENSE_SCOPE.md](LICENSE_SCOPE.md) for the distinction between the code's Apache 2.0 license and the CANDOR terms.
 
 The index contains 200 segments from 49 conversations. Its timestamps were extracted from the original benchmark filenames and have not been independently aligned against the source recordings. A local segment-extraction script is a follow-up implementation item and is not included in this release.
 
