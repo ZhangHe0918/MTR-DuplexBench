@@ -6,43 +6,30 @@
 
 This directory contains the evaluation scripts for MTR-DuplexBench. Follow the guide below to set up and run evaluations for your own models.
 
+## CANDOR access and license scope
+
+Portions of this benchmark are derived from the CANDOR corpus. Access must be requested at [https://betterup-data-requests.herokuapp.com](https://betterup-data-requests.herokuapp.com). Citation: Reece et al. (2023), Science Advances.
+
+Dialogue Quality uses CANDOR-derived segments. Obtain your own approved copy of CANDOR before using this portion of the benchmark. The public replacement is a [segment index](https://huggingface.co/datasets/Jeff0918/MTR-DuplexBench/blob/main/data/Dialogue_Quality/candor_segments.csv) and timing annotations. The index is published and the transcript has been removed from the current Hugging Face version; audio removal and historical/cache cleanup are in progress. CANDOR recordings and transcripts must not be redistributed through this benchmark. See [LICENSE_SCOPE.md](LICENSE_SCOPE.md) for the distinction between the code's Apache 2.0 license and the CANDOR terms.
+
+The index contains 200 segments from 49 conversations. Its timestamps were extracted from the original benchmark filenames and have not been independently aligned against the source recordings. A local segment-extraction script is a follow-up implementation item and is not included in this release.
+
+
 ---
 
 ## Quick Start
 
 ### 1. Download Data and Code
 
-Clone the dataset from HuggingFace, which includes both the evaluation data and the code:
+Clone the evaluation code and the public benchmark resources separately. CANDOR audio and transcripts require separate approval and must be obtained through the CANDOR access process. Hugging Face audio removal and historical/cache cleanup are in progress:
 
 ```bash
+git clone https://github.com/ZhangHe0918/MTR-DuplexBench.git MTR-DuplexBench-code
 git lfs install
-git clone https://huggingface.co/datasets/Jeff0918/MTR-DuplexBench
+git clone https://huggingface.co/datasets/Jeff0918/MTR-DuplexBench MTR-DuplexBench-data
 ```
 
-After cloning, you should have the following structure:
-
-```
-MTR-DuplexBench/
-├── code/                             # This directory — evaluation scripts
-│   └── Eval/
-│       ├── asr_incremental_save.py
-│       ├── eval_1_scenario.py
-│       ├── eval_2_scenarios.py
-│       ├── eval_3_scenarios.py
-│       ├── eval_4_scenarios.py
-│       ├── eval_single_scenario_background.py
-│       ├── eval_single_scenario_pause_handling.py
-│       ├── gpt4o_mark_in_turn_GT_condor.py
-│       ├── instruction_following_evaluation.py
-│       └── safety_evaluation.py
-├── data/                             # Evaluation data
-│   ├── Conversational_Features/
-│   ├── Instruction_Following/
-│   ├── Safety/
-│   ├── Dialogue_Quality/
-│   └── Scenarios_encoding/
-└── envs/                             # Environment configurations
-```
+The code checkout contains `Eval/` and `envs/`. The data checkout contains `data/` and the two retained timing-annotation files. The CANDOR segment index is published at the linked path. Adjust the example paths below to your local checkouts. Dialogue Quality audio paths refer to locally prepared files from your approved CANDOR copy, not files supplied by the public download.
 
 ### 2. Install Dependencies
 
@@ -123,7 +110,8 @@ After inference, run the corresponding evaluation script on the output audio. Th
 Evaluates whether model turns are semantically meaningful on a 0–5 scale using GPT-4o.
 
 **Inference input:**
-- Source audio: `data/Dialogue_Quality/*.mp3`
+- Segment index: [`data/Dialogue_Quality/candor_segments.csv`](https://huggingface.co/datasets/Jeff0918/MTR-DuplexBench/blob/main/data/Dialogue_Quality/candor_segments.csv). Fields: `clip_filename`, `conversation_id`, `start_seconds`, `end_seconds`, `duration_seconds`.
+- Source audio: local segments prepared from your own approved CANDOR copy, named according to `clip_filename`. Start and end values are seconds encoded in the original benchmark filenames; `duration_seconds = end_seconds - start_seconds`. The extraction script and source-alignment validation remain follow-up work.
 - Turn boundaries: `data/Scenarios_encoding/dialogue_quality/semantic_turned_time_v3.jsonl`
 
 **Inference output:** Stereo audio files (MP3, left=user, right=model) from your model.
@@ -307,6 +295,8 @@ If you have any questions, feel free to reach out through the following channels
 ---
 
 ## Citation
+
+For the CANDOR-derived portion, also cite Reece et al. (2023), *Science Advances*.
 
 ```bibtex
 @inproceedings{mtr_duplexbench_2026,
