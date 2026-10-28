@@ -10,7 +10,7 @@ This directory contains the evaluation scripts for MTR-DuplexBench. Follow the g
 
 Portions of this benchmark are derived from the CANDOR corpus. Access must be requested at [https://betterup-data-requests.herokuapp.com](https://betterup-data-requests.herokuapp.com). Citation: Reece et al. (2023), Science Advances.
 
-Dialogue Quality uses CANDOR-derived segments. Obtain your own approved copy of CANDOR before using this portion of the benchmark. (https://huggingface.co/datasets/Jeff0918/MTR-DuplexBench/blob/main/data/Dialogue_Quality/candor_segments.csv) and timing annotations. CANDOR recordings and transcripts must not be redistributed through this benchmark. See [LICENSE_SCOPE.md](LICENSE_SCOPE.md) for the distinction between the code's Apache 2.0 license and the CANDOR terms.
+Dialogue Quality uses CANDOR-derived segments. Obtain your own approved copy of CANDOR before using this portion of the benchmark. The benchmark provides a [segment index](https://huggingface.co/datasets/Jeff0918/MTR-DuplexBench/blob/main/data/Dialogue_Quality/candor_segments.csv) and timing annotations. CANDOR recordings and transcripts must not be redistributed through this benchmark. See [LICENSE_SCOPE.md](LICENSE_SCOPE.md) for the distinction between the code's Apache 2.0 license and the CANDOR terms.
 
 The index contains 200 segments from 49 conversations. Its timestamps were extracted from the original benchmark filenames and have not been independently aligned against the source recordings. A local segment-extraction script is a follow-up implementation item and is not included in this release.
 
@@ -21,7 +21,7 @@ The index contains 200 segments from 49 conversations. Its timestamps were extra
 
 ### 1. Download Data and Code
 
-Clone the evaluation code and the public benchmark resources separately. CANDOR audio and transcripts require separate approval and must be obtained through the CANDOR access process. Hugging Face audio removal and historical/cache cleanup are in progress:
+Clone the evaluation code and the public benchmark resources separately. CANDOR audio and transcripts require separate approval and must be obtained through the CANDOR access process.
 
 ```bash
 git clone https://github.com/ZhangHe0918/MTR-DuplexBench.git MTR-DuplexBench-code
@@ -306,3 +306,4 @@ For the CANDOR-derived portion, also cite Reece et al. (2023), *Science Advances
   year={2026}
 }
 ```
+
