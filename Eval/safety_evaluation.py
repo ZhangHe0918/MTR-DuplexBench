@@ -149,7 +149,7 @@ def check_existing_result(output_file, dialogue_id, round_num, scenario):
         print(f"Warning: Could not check existing results: {e}")
         return None
 
-def get_cache_key(audio_file, user_channel="left"):
+def get_cache_key(audio_file, user_channel="right"):
     """Create cache key for ASR audio file"""
     return f"{audio_file}_{user_channel}"
 
@@ -248,7 +248,7 @@ def extract_text_after_round_start(user_text, model_text, round_start):
     
     return filtered_user_text.strip(), filtered_model_text.strip()
 
-def process_safety_audio_files(safety_output_dir, output_file, user_channel="left", asr_cache_file=None, asr_output_file=None, round_start_json_file=None):
+def process_safety_audio_files(safety_output_dir, output_file, user_channel="right", asr_cache_file=None, asr_output_file=None, round_start_json_file=None):
     """Process all safety audio files and evaluate them with incremental saving"""
     print(f"Processing safety audio files from: {safety_output_dir}")
     
@@ -487,7 +487,7 @@ def main():
                        help="Directory containing safety_pipeline output audio files")
     parser.add_argument("--output_file", type=str, required=True,
                        help="Output JSON file for evaluation results")
-    parser.add_argument("--user_channel", type=str, default="left",
+    parser.add_argument("--user_channel", type=str, default="right",
                        choices=["left", "right"],
                        help="Channel containing user speech")
     parser.add_argument("--cuda_device", type=int, default=0,

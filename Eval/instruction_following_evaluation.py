@@ -125,7 +125,7 @@ def check_existing_instruction_following_result(output_file, dialogue_id, round_
         print(f"Warning: Could not check existing results: {e}")
         return None
 
-def process_instruction_following_audio_files(instruction_following_output_dir, output_file, user_channel="left", asr_cache_file=None, asr_output_file=None, round_start_json_file=None):
+def process_instruction_following_audio_files(instruction_following_output_dir, output_file, user_channel="right", asr_cache_file=None, asr_output_file=None, round_start_json_file=None):
     """Process all instruction following audio files and evaluate them with incremental saving"""
     print(f"Processing instruction following audio files from: {instruction_following_output_dir}")
     
@@ -437,7 +437,7 @@ def main():
                        help="Directory containing instruction following audio files")
     parser.add_argument("--output_file", type=str, required=True,
                        help="Output JSON file for evaluation results")
-    parser.add_argument("--user_channel", type=str, default="left", choices=["left", "right"],
+    parser.add_argument("--user_channel", type=str, default="right", choices=["left", "right"],
                        help="User channel in stereo audio")
     parser.add_argument("--asr_cache_file", type=str, default=None,
                        help="ASR cache file to speed up processing")

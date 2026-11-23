@@ -58,7 +58,7 @@ def asr_ts_on_stereo(input_file):
 
     return left_corrected_segments, right_corrected_segments
 
-def asr_on_stereo_audio(input_file, user_channel="left", start_time=None):
+def asr_on_stereo_audio(input_file, user_channel="right", start_time=None):
     """Perform ASR on stereo audio file and separate user/model channels"""
     # Load stereo audio
     waveform, sample_rate = torchaudio.load(input_file)
@@ -94,7 +94,7 @@ def asr_on_stereo_audio(input_file, user_channel="left", start_time=None):
     
     return user_text, model_text
 
-def create_asr_cache_key(audio_file, user_channel="left"):
+def create_asr_cache_key(audio_file, user_channel="right"):
     """Create cache key for ASR audio file"""
     return f"{audio_file}_{user_channel}"
 
@@ -146,6 +146,8 @@ def save_asr_result_incremental(output_file, result):
     else:
         print(f"Output file does not exist, will create: {output_file}")
     
+    # Legacy results without user_channel used the old left-user default.
+    # Keep that fallback to avoid reusing them as right-user results.
     # Check if this result already exists (avoid duplicates)
     result_key = f"{result['audio_file']}_{result.get('user_channel', 'left')}"
     existing_keys = [f"{r['audio_file']}_{r.get('user_channel', 'left')}" for r in existing_results]
@@ -163,7 +165,7 @@ def save_asr_result_incremental(output_file, result):
     else:
         print(f"ASR result already exists, skipping: {result_key}")
 
-def process_asr_audio_files_incremental(audio_files, output_file, user_channel="left", asr_cache_file=None, 
+def process_asr_audio_files_incremental(audio_files, output_file, user_channel="right", asr_cache_file=None, 
                                        use_timestamped=True, save_segments=True):
     """
     Process audio files with ASR and save results incrementally
@@ -317,7 +319,7 @@ def main():
     parser = argparse.ArgumentParser(description="Process audio files with incremental ASR saving")
     parser.add_argument("--audio_dir", required=True, help="Directory containing audio files")
     parser.add_argument("--output_file", required=True, help="Output file for ASR results")
-    parser.add_argument("--user_channel", default="left", choices=["left", "right"], help="User channel")
+    parser.add_argument("--user_channel", default="right", choices=["left", "right"], help="User channel")
     parser.add_argument("--cache_file", help="ASR cache file path")
     parser.add_argument("--use_timestamped", action="store_true", help="Use timestamped ASR")
     parser.add_argument("--save_segments", action="store_true", help="Save detailed segments")

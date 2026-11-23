@@ -18,7 +18,7 @@ speaker_map = {
     "right": "user", 
     "left": "model"
 }
-context = "all"  # "all" or "right". "right" means only the model channel's output is given to GPT for judging.
+context = "all"  # "all", "left" (assistant/model only), or "right" (user only).
 # load the openai api client
 client = OpenAI(
     base_url="XXXXXXXXX",  # Optional: only needed if using custom endpoint
@@ -94,6 +94,8 @@ def merge_stereo_segments(left_segments, right_segments):
     # Merge and sort by start time
     if context == "all":
         merged = tagged_left + tagged_right
+    elif context == "left":
+        merged = tagged_left
     elif context == "right":
         merged = tagged_right
     else:
