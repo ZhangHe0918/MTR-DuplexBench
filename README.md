@@ -92,8 +92,8 @@ with open("data/Scenarios_encoding/single_scenario/scenario_encoding_smooth.json
 
 Build your own inference pipeline that feeds the audio and scenario information into the model you want to evaluate. The key requirement is that the model's output must be saved as **stereo audio**:
 
-- **Left channel**: User audio
-- **Right channel**: Model audio
+- **Left channel**: Assistant (model) audio
+- **Right channel**: User audio
 
 Save the output audio files following the naming conventions expected by the evaluation scripts (see details per dimension below).
 
@@ -114,7 +114,7 @@ Evaluates whether model turns are semantically meaningful on a 0–5 scale using
 - Source audio: local segments prepared from your own approved CANDOR copy, named according to `clip_filename`. Start and end values are seconds encoded in the original benchmark filenames; `duration_seconds = end_seconds - start_seconds`. The extraction script and source-alignment validation remain follow-up work.
 - Turn boundaries: `data/Scenarios_encoding/dialogue_quality/semantic_turned_time_v3.jsonl`
 
-**Inference output:** Stereo audio files (MP3, left=user, right=model) from your model.
+**Inference output:** Stereo audio files (MP3, left=assistant/model, right=user) from your model.
 
 **Run evaluation:**
 
@@ -139,7 +139,7 @@ Evaluates turn-taking behavior including latency, backchannel frequency, and whe
 - Source audio: `data/Conversational_Features/original/*.wav` or `data/Conversational_Features/woPAUSE/*.wav`
 - Scenario encoding: `data/Scenarios_encoding/single_scenario/` or `data/Scenarios_encoding/multi_scenarios/`
 
-**Inference output:** Stereo WAV files (left=user, right=model).
+**Inference output:** Stereo WAV files (left=assistant/model, right=user).
 
 #### Single Scenario
 
@@ -174,7 +174,7 @@ Scripts form a layered hierarchy — higher-numbered scripts delegate to lower o
 python asr_incremental_save.py \
   --audio_dir path/to/your/output/audio/ \
   --output_file results/asr_results.json \
-  --user_channel left
+  --user_channel right
 ```
 
 Then use the ASR results and scenario encodings as input to the `eval_*_scenarios()` functions programmatically.
@@ -190,7 +190,7 @@ Evaluates whether the model follows user instructions in audio conversations. Us
 - Dialogue metadata: `data/Instruction_Following/instruction_following_data.json`
 - Scenario encoding: `data/Scenarios_encoding/instruction_following/`
 
-**Inference output:** Stereo WAV files named `dialogue_instruction_following_*_round_*_*.wav` (left=user, right=model).
+**Inference output:** Stereo WAV files named `dialogue_instruction_following_*_round_*_*.wav` (left=assistant/model, right=user).
 
 **Run evaluation:**
 
@@ -200,7 +200,7 @@ cd Eval
 python instruction_following_evaluation.py \
   --instruction_following_output_dir path/to/your/output/audio/ \
   --output_file results/instruction_following_results.json \
-  --user_channel left
+  --user_channel right
 ```
 
 **Optional arguments:**
@@ -226,7 +226,7 @@ Evaluates whether model responses to harmful user requests are safe. Uses GPT-4o
 - Dialogue metadata: `data/Safety/safety_data.json`
 - Scenario encoding: `data/Scenarios_encoding/safety/`
 
-**Inference output:** Stereo WAV files named `dialogue_safety_*_round_*_*.wav` (left=user, right=model).
+**Inference output:** Stereo WAV files named `dialogue_safety_*_round_*_*.wav` (left=assistant/model, right=user).
 
 **Run evaluation:**
 
@@ -236,7 +236,7 @@ cd Eval
 python safety_evaluation.py \
   --safety_output_dir path/to/your/output/audio/ \
   --output_file results/safety_results.json \
-  --user_channel left
+  --user_channel right
 ```
 
 **Optional arguments:**
@@ -266,7 +266,7 @@ python safety_evaluation.py \
 python asr_incremental_save.py \
   --audio_dir path/to/audio/ \
   --output_file results/asr_results.json \
-  --user_channel left \
+  --user_channel right \
   --cache_file results/asr_cache.json
 ```
 
